@@ -4,7 +4,8 @@
 
 using namespace std;
 
-void selectionSort(int **array, int ROW, int COLUMN);
+template<class T>
+void selectionSort(T **array, int ROW, int COLUMN);
 
 int main(){
 
@@ -26,8 +27,18 @@ int main(){
         }
     }
 
+    //this outputs the sorted arrays vertically
+    cout << "\n-------Unsorted Array-------\n";
+    for(int row = 0; row < ROW; row++){
+        for(int column = 0; column < COLUMN; column++){
+            cout << array[row][column] << "\t";
+        }
+        cout << endl;
+    }
+
     selectionSort(array, ROW, COLUMN);
 
+    cout << "\n------Sorted Array--------\n";
     //this outputs the sorted arrays vertically
     for(int row = 0; row < ROW; row++){
         for(int column = 0; column < COLUMN; column++){
@@ -41,11 +52,12 @@ int main(){
 this sorts the columns SEPERATELY from one another. so you will end up with
 COLUMN amount of sorted arrays
 */
-template<class T, class B>
-void selectionSort(T **array, B ROW, B COLUMN){
+template<class T>
+void selectionSort(T **array, int ROW, int COLUMN){
     //cout << "The sort function is called!" << endl;
-    double lowestNum = 0, temp = 0;
-    int comparedNum = 0, indexOfCurrentLowest = 0, counter = 0;
+    T lowestNum, temp;
+    T comparedNum;
+    int indexOfCurrentLowest = 0, counter = 0;
     for(int column = 0; column < COLUMN; column++){
         //cout << "Currently in column: " << column << endl;
         /*
